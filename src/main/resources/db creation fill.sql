@@ -1,0 +1,159 @@
+drop table Orders CASCADE CONSTRAINTS;
+drop table BA CASCADE CONSTRAINTS;
+drop table BG CASCADE CONSTRAINTS;
+drop table Authors CASCADE CONSTRAINTS;
+drop table Books CASCADE CONSTRAINTS;
+drop table Genres CASCADE CONSTRAINTS;
+
+CREATE TABLE Books(
+   id NUMERIC(3) NOT NuLL,
+   name VARCHAR(30) NOT NULL,
+   description  VARCHAR(300),
+   price FLOAT NOT NULL,
+   CHECK (price > 0),
+   CONSTRAINT book_pk
+          PRIMARY KEY (id)
+);
+
+
+CREATE TABLE Genres(
+   id NUMERIC(4) NOT NuLL,
+   name VARCHAR(15) NOT NULL,
+   CONSTRAINT genre_pk
+          PRIMARY KEY (id)
+);
+
+CREATE TABLE Authors(
+   id NUMERIC(4) NOT NuLL,
+   name VARCHAR(15) NOT NULL,
+   CONSTRAINT author_pk
+          PRIMARY KEY (id)
+);
+
+CREATE TABLE BG(
+  id_book NUMERIC(4),
+  id_genre NUMERIC(4),
+   PRIMARY KEY (id_book, id_genre),
+    FOREIGN KEY (id_book) REFERENCES Books (id),
+    FOREIGN KEY (id_genre) REFERENCES Genres (id)
+);
+
+CREATE TABLE BA(
+  id_book NUMERIC(4),
+  id_author NUMERIC(4),
+   PRIMARY KEY (id_book, id_author),
+    FOREIGN KEY (id_book) REFERENCES Books (id),
+    FOREIGN KEY (id_author) REFERENCES Authors (id)
+);
+
+
+CREATE TABLE Orders(
+    id   NUMBER(6) NOT NULL,
+    first_name VARCHAR(10) NOT NULL,
+    last_name  VARCHAR(10) NOT NULL,
+   address    VARCHAR2(100) NOT NULL,
+   id_book NUMBER(4) NOT NULL,
+    quant NUMBER(4),
+    order_date DATE,
+    CHECK (quant > 0),
+   PRIMARY KEY (id),
+    FOREIGN KEY (id_book) REFERENCES Books (id)
+ );
+
+
+CREATE SEQUENCE genres_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+
+ CREATE SEQUENCE books_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+
+ CREATE SEQUENCE authors_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+
+  CREATE SEQUENCE orders_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+
+
+
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book1','desc1',11);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book2','desc2',22);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book3','desc3',33);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book4','desc4',44);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book5','desc5',55);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book6','desc6',66);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book7','desc7',77);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book8','desc8',88);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book9','desc9',99);
+INSERT INTO Books VALUES (books_seq.NEXTVAL,'book10','desc10',1010);
+
+
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre1');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre2');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre3');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre4');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre5');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre6');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre7');
+INSERT INTO Genres VALUES (genres_seq.NEXTVAL,'genre8');
+
+INSERT INTO Authors VALUES (authors_seq.NEXTVAL,'author1');
+INSERT INTO Authors VALUES (authors_seq.NEXTVAL,'author2');
+INSERT INTO Authors VALUES (authors_seq.NEXTVAL,'author3');
+INSERT INTO Authors VALUES (authors_seq.NEXTVAL,'author4');
+INSERT INTO Authors VALUES (authors_seq.NEXTVAL,'author5');
+
+
+INSERT INTO BA VALUES (1,1);
+INSERT INTO BA VALUES (2,2);
+INSERT INTO BA VALUES (2,1);
+INSERT INTO BA VALUES (3,3);
+INSERT INTO BA VALUES (3,4);
+INSERT INTO BA VALUES (4,1);
+INSERT INTO BA VALUES (5,5);
+INSERT INTO BA VALUES (6,5);
+INSERT INTO BA VALUES (7,4);
+INSERT INTO BA VALUES (7,3);
+INSERT INTO BA VALUES (8,3);
+INSERT INTO BA VALUES (9,2);
+INSERT INTO BA VALUES (10,2);
+INSERT INTO BA VALUES (10,3);
+INSERT INTO BA VALUES (10,4);
+
+INSERT INTO BG VALUES (1,8);
+INSERT INTO BG VALUES (2,8);
+INSERT INTO BG VALUES (2,1);
+INSERT INTO BG VALUES (3,4);
+INSERT INTO BG VALUES (3,5);
+INSERT INTO BG VALUES (4,2);
+INSERT INTO BG VALUES (5,3);
+INSERT INTO BG VALUES (6,4);
+INSERT INTO BG VALUES (7,7);
+INSERT INTO BG VALUES (7,3);
+INSERT INTO BG VALUES (8,6);
+INSERT INTO BG VALUES (8,1);
+INSERT INTO BG VALUES (9,3);
+INSERT INTO BG VALUES (9,1);
+INSERT INTO BG VALUES (9,7);
+INSERT INTO BG VALUES (9,8);
+INSERT INTO BG VALUES (10,1);
+
+INSERT INTO Orders VALUES (orders_seq.NEXTVAL,'KING','KINGROY','SOMEADDR1',5,2,sysdate);
+INSERT INTO Orders VALUES (orders_seq.NEXTVAL,'BLAKE','BLAKEROY','SOMEADDR2',1,1,sysdate);
+INSERT INTO Orders VALUES (orders_seq.NEXTVAL,'CLARK','CLARKROY','SOMEADDR3',8,5,sysdate);
+INSERT INTO Orders VALUES (orders_seq.NEXTVAL,'JONES','JONESROY','SOMEADDR4',8,1,sysdate);
+INSERT INTO Orders VALUES (orders_seq.NEXTVAL,'MARTIN','MARTINROY','SOMEADDR5',9,2,sysdate);
+
+commit;
+
