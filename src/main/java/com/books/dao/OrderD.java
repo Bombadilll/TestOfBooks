@@ -1,9 +1,11 @@
 package com.books.dao;
 
 import com.books.model.impl.Order;
+import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
-
+@Service
 public interface OrderD {
 
     /**

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
@@ -21,6 +22,7 @@ import java.util.Set;
 
 
 @Component
+@Service
 public class BookDImp implements BookD {
 
 

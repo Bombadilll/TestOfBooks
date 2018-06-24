@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@Service
 public class OrderDImp implements OrderD {
 
     private static final Logger LOGGER = LogManager.getLogger(OrderDImp.class);

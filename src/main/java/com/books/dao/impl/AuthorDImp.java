@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@Service
 public class AuthorDImp implements AuthorD {
 
 
@@ -22,12 +24,9 @@ public class AuthorDImp implements AuthorD {
 
     private JdbcTemplate jdbcTemplate;
 
-    private DataSource dataSource;
-
 
     @Autowired
     public AuthorDImp(DataSource dataSource) {
-        this.dataSource = dataSource;
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

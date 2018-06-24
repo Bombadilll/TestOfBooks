@@ -1,9 +1,11 @@
 package com.books.dao;
 
 import com.books.model.impl.Genre;
+import org.springframework.stereotype.Service;
+
 import java.util.Set;
 
-
+@Service
 public interface GenreD {
 
     /**

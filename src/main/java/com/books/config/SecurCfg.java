@@ -11,9 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 
-/**
- * Created by Admin on 13.12.2016.
- */
+
 
 @Configuration
 @ComponentScan("com.books.*")

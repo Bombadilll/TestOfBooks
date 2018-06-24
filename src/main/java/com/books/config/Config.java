@@ -25,6 +25,10 @@ import javax.sql.DataSource;
 @EnableScheduling
 public class Config extends WebMvcConfigurerAdapter {
 
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/testBook";
+    private static final String LOGIN = "root";
+    private static final String PASSWORD = "bombadil";
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -42,10 +46,10 @@ public class Config extends WebMvcConfigurerAdapter {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        dataSource.setUrl(oracleJdbcUrl());
-        dataSource.setUsername(oracleLogin());
-        dataSource.setPassword(oraclePassword());
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl(mysqlJdbcUrl());
+        dataSource.setUsername(mysqlLogin());
+        dataSource.setPassword(mysqlPassword());
         return dataSource;
     }
 
@@ -56,19 +60,19 @@ public class Config extends WebMvcConfigurerAdapter {
         return dataSourceTransactionManager;
     }
 
-    private String oracleJdbcUrl() {
-        String env = System.getenv("ORACLE_JDBC_URL");
-        return env != null ? env : "jdbc:oracle:thin:@//localhost:1521/XE";
+    private String mysqlJdbcUrl() {
+        String env = System.getenv(JDBC_URL);
+        return env != null ? env : "jdbc:mysql://localhost:3306/testBook";
     }
 
-    private String oracleLogin() {
-        String env = System.getenv("ORACLE_LOGIN");
-        return env != null ? env : "books";
+    private String mysqlLogin() {
+        String env = System.getenv(LOGIN);
+        return env != null ? env : "root";
     }
 
-    private String oraclePassword() {
-        String env = System.getenv("ORACLE_PASSWORD");
-        return env != null ? env : "books";
+    private String mysqlPassword() {
+        String env = System.getenv(PASSWORD);
+        return env != null ? env : "bombadil";
     }
 
 }
